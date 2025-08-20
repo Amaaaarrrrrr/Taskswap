@@ -3,15 +3,5 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ],
-
-  "compilerOptions": {
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "jsx": "react-jsx",   // for React 18+
-    "target": "ES2017",
-    "lib": ["ES2015", "DOM"]
-  }
-
-
+  ]
 }
