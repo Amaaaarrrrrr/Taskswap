@@ -1,0 +1,211 @@
+1. Auth Routes
+Register
+
+POST /register
+
+Payload:
+
+{
+  "name": "alice",
+  "email": "alice@example.com",
+  "password": "password123"
+}
+
+
+Expected Response:
+
+{
+  "id": 1,
+  "name": "alice",
+  "email": "alice@example.com",
+  "created_at": "2025-08-20T12:00:00",
+  "updated_at": "2025-08-20T12:00:00"
+}
+
+Login
+
+POST /login
+
+Payload:
+
+{
+  "email": "alice@example.com",
+  "password": "password123"
+}
+
+
+Expected Response:
+
+{
+  "access_token": "JWT_ACCESS_TOKEN",
+  "refresh_token": "JWT_REFRESH_TOKEN"
+}
+
+Refresh Token
+
+POST /refresh-token
+
+Header: Authorization: Bearer <REFRESH_TOKEN>
+
+Response:
+
+{
+  "access_token": "NEW_JWT_ACCESS_TOKEN"
+}
+
+Logout
+
+POST /logout
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Response:
+
+{
+  "message": "Successfully logged out"
+}
+
+2. User Routes
+Get Profile
+
+GET /profile/:id
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Response:
+
+{
+  "id": 1,
+  "name": "alice",
+  "email": "alice@example.com",
+  "skills": "Python, React",
+  "rating": 0.0,
+  "avatar_url": null,
+  "tasks_created": [...],
+  "tasks_assigned": [...],
+  "created_at": "...",
+  "updated_at": "..."
+}
+
+List/Search Users
+
+GET /users?name=alice&skill=Python
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Response:
+
+[
+  {
+    "id": 1,
+    "name": "alice",
+    "skills": "Python, React",
+    "rating": 0.0
+  }
+]
+
+3. Task Routes
+Create Task
+
+POST /tasks
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Payload:
+
+{
+  "title": "Build a Website",
+  "description": "React portfolio project",
+  "category": "Development"
+}
+
+List Tasks
+
+GET /tasks
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Task Detail
+
+GET /tasks/:id
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Update Task
+
+PUT /tasks/:id
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Payload (example):
+
+{
+  "status": "assigned",
+  "assigned_to": 2
+}
+
+Delete Task
+
+DELETE /tasks/:id
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+4. SwapRequest Routes
+Request Swap
+
+POST /swap
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Payload:
+
+{
+  "task_id": 1
+}
+
+Accept Swap
+
+POST /swap/:id/accept
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Reject Swap
+
+POST /swap/:id/reject
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+5. Review Routes
+Create Review
+
+POST /reviews
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Payload:
+
+{
+  "reviewer_id": 2,
+  "reviewee_id": 1,
+  "task_id": 1,
+  "rating": 5,
+  "comment": "Great work!"
+}
+
+List Reviews
+
+GET /reviews?task_id=1
+
+Header: Authorization: Bearer <ACCESS_TOKEN>
+
+Response:
+
+[
+  {
+    "reviewer_id": 2,
+    "reviewee_id": 1,
+    "task_id": 1,
+    "rating": 5,
+    "comment": "Great work!"
+  }
+]

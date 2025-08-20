@@ -1,0 +1,175 @@
+{
+  "info": {
+    "name": "TaskSwap API",
+    "_postman_id": "12345678-abcd-efgh-ijkl-1234567890ab",
+    "description": "Postman collection for TaskSwap backend",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"alice\",\n  \"email\": \"alice@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "http://localhost:5000/register", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["register"] }
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"alice@example.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": { "raw": "http://localhost:5000/login", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["login"] }
+          }
+        },
+        {
+          "name": "Refresh Token",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{refresh_token}}" }],
+            "url": { "raw": "http://localhost:5000/refresh-token", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["refresh-token"] }
+          }
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:5000/logout", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["logout"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get Profile",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:5000/profile/1", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["profile","1"] }
+          }
+        },
+        {
+          "name": "List/Search Users",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:5000/users?name=alice", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["users"], "query": [{ "key": "name", "value": "alice" }] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Tasks",
+      "item": [
+        {
+          "name": "Create Task",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Build a Website\",\n  \"description\": \"React portfolio project\",\n  \"category\": \"Development\"\n}"
+            },
+            "url": { "raw": "http://localhost:5000/tasks", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["tasks"] }
+          }
+        },
+        {
+          "name": "List Tasks",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:5000/tasks", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["tasks"] }
+          }
+        },
+        {
+          "name": "Task Detail",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:5000/tasks/1", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["tasks","1"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "SwapRequests",
+      "item": [
+        {
+          "name": "Request Swap",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": { "mode": "raw", "raw": "{ \"task_id\": 1 }" },
+            "url": { "raw": "http://localhost:5000/swap", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["swap"] }
+          }
+        },
+        {
+          "name": "Accept Swap",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:5000/swap/1/accept", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["swap","1","accept"] }
+          }
+        },
+        {
+          "name": "Reject Swap",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:5000/swap/1/reject", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["swap","1","reject"] }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Reviews",
+      "item": [
+        {
+          "name": "Create Review",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Authorization", "value": "Bearer {{access_token}}" },
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reviewer_id\": 2,\n  \"reviewee_id\": 1,\n  \"task_id\": 1,\n  \"rating\": 5,\n  \"comment\": \"Great work!\"\n}"
+            },
+            "url": { "raw": "http://localhost:5000/reviews", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["reviews"] }
+          }
+        },
+        {
+          "name": "List Reviews",
+          "request": {
+            "method": "GET",
+            "header": [{ "key": "Authorization", "value": "Bearer {{access_token}}" }],
+            "url": { "raw": "http://localhost:5000/reviews?task_id=1", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["reviews"], "query": [{ "key": "task_id", "value": "1" }] }
+          }
+        }
+      ]
+    }
+  ]
+}
