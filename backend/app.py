@@ -11,9 +11,11 @@ from functools import wraps
 from extensions import db
 from models import User, Task, SwapRequest, Review
 import csv
+from flask_cors import CORS
 import io
 
 app = Flask(__name__)
+cors = CORS(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://taskswap_user:taskswap@localhost/taskswap_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'super-secret-key'
